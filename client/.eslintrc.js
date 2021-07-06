@@ -38,5 +38,15 @@ module.exports = {
     ],
     '@typescript-eslint/no-use-before-define': ['error'],
     'no-use-before-define': 'off',
+    'react/state-in-constructor': 0,
+    camelcase: 0,
+    'react/destructuring-assignment': [
+      'error',
+      'always',
+      {
+        ignoreClassFields: true,
+      },
+    ],
+    'react/jsx-no-bind': 0,
   },
 };
