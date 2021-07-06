@@ -8,6 +8,7 @@ import {
   Row,
   Col,
 } from 'antd';
+import UserRepos from '../userRepos';
 
 import apiGit from '../../../../service/api/apiGit';
 
@@ -93,6 +94,14 @@ class UserDetail extends React.Component<IUserDetailProps> {
           <Col span={12} style={{ textAlign: 'left' }}>
             <span style={{ fontWeight: 'bold' }}>Company: </span>
             <span>{user?.company || ''}</span>
+          </Col>
+        </Row>
+        <Row gutter={[12, 24]} justify="start">
+          <Col span={24} style={{ textAlign: 'left' }}>
+            <UserRepos
+              login={login}
+              loading={loading}
+            />
           </Col>
         </Row>
       </Card>
