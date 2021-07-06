@@ -26,7 +26,7 @@ export default {
     return users;
   },
 
-  showUserDetails: async (username: string): Promise<any> => {
+  showUserDetails: async (username: string, showRepos: boolean): Promise<any> => {
     if (!username) {
       return {
         message: 'Request error!',
@@ -34,7 +34,7 @@ export default {
       };
     }
 
-    const users = await fetch(`https://api.github.com/users/${username}`, {
+    const users = await fetch(`https://api.github.com/users/${username}${showRepos ? '/repos' : ''}`, {
       method: 'GET',
       body: undefined,
     })
