@@ -1,10 +1,14 @@
-/* global describe, it, expect */
+/* global describe, it, expect, afterAll */
 
 import Api from '../utils/apiCalls';
 
 import mock from '../mocks/listUsers';
 
 describe('ListUsers', () => {
+  afterAll(async () => {
+    await Api.close();
+  });
+
   it('should return the users with default queries', async () => {
     const response = await Api.listUsers(null);
 

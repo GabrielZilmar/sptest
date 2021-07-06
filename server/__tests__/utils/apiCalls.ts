@@ -7,5 +7,9 @@ export default {
     .query(query)
     .catch((err: any) => err),
 
+  showUserDetails: (param: any) => request(app)
+    .get(`/users/${param}/details`)
+    .catch((err: any) => err),
+
   close: () => app.close(),
 };
