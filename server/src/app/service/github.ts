@@ -25,4 +25,26 @@ export default {
 
     return users;
   },
+
+  showUserDetails: async (username: string): Promise<any> => {
+    if (!username) {
+      return {
+        message: 'Request error!',
+        error: 'Username params is mandatory!',
+      };
+    }
+
+    const users = await fetch(`https://api.github.com/users/${username}`, {
+      method: 'GET',
+      body: undefined,
+    })
+      .then((response) => response.json())
+      .catch((error) => ({
+        message: 'Request error!',
+        error: error.message,
+        response: error.response,
+      }));
+
+    return users;
+  },
 };
