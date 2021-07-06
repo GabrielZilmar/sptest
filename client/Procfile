@@ -1,4 +1,0 @@
-web: npm install
-web: npm build
-web: npm install -g serve
-web: serve -s build
