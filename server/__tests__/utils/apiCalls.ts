@@ -11,5 +11,9 @@ export default {
     .get(`/users/${param}/details`)
     .catch((err: any) => err),
 
+  showUserRepos: (param: any) => request(app)
+    .get(`/users/${param}/repos`)
+    .catch((err: any) => err),
+
   close: () => app.close(),
 };
