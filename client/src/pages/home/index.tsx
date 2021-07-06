@@ -6,6 +6,8 @@ import {
   Card,
   List,
   notification,
+  Button,
+  Space,
 } from 'antd';
 import apiGit from '../../service/api/apiGit';
 
@@ -16,26 +18,28 @@ import { IUser } from '../../types/github';
 interface IHomeState {
   users: IUser[] | undefined;
   loading: boolean
+  since: number;
 }
 
 class Home extends React.Component {
   state: IHomeState = {
     users: undefined,
     loading: false,
+    since: 0,
   }
 
   componentDidMount() {
     const { users } = this.state;
 
     if (!users) {
-      this.handleUsers();
+      this.handleUsers(0, 4);
     }
   }
 
-  handleUsers = async () => {
+  handleUsers = async (since: number, perPage: number) => {
     this.setState({ loading: true });
 
-    const response = await apiGit.listUsers();
+    const response = await apiGit.listUsers(since, perPage);
     if (response?.data.length > 0) {
       this.setState({ users: response.data });
     } else {
@@ -48,7 +52,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const { loading, users } = this.state;
+    const { loading, users, since } = this.state;
 
     return (
       <>
@@ -94,9 +98,6 @@ class Home extends React.Component {
                 style={{
                   textAlign: 'center',
                 }}
-                pagination={{
-                  pageSize: 4,
-                }}
                 renderItem={(item: IUser) => (
                   <List.Item>
                     <UserCard
@@ -109,6 +110,29 @@ class Home extends React.Component {
                   </List.Item>
                 )}
               />
+              <Space>
+                <Button
+                  disabled={since < 1}
+                  onClick={() => {
+                    if (since >= 1) {
+                      const newSince = since - 1;
+                      this.setState({ since: newSince });
+                      this.handleUsers(newSince, 4);
+                    }
+                  }}
+                >
+                  Previus
+                </Button>
+                <Button
+                  onClick={() => {
+                    const newSince = since + 1;
+                    this.setState({ since: newSince });
+                    this.handleUsers(newSince, 4);
+                  }}
+                >
+                  Next
+                </Button>
+              </Space>
             </Card>
           </Col>
         </Row>
