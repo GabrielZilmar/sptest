@@ -9,7 +9,7 @@ interface IfetchAPIProps {
 const fetchAPI = async (props: IfetchAPIProps): Promise<any> => {
   const { method, url, body } = props;
 
-  const api = Axios.create({ baseURL: 'http://localhost:8000' });
+  const api = Axios.create({ baseURL: 'https://gitzilmar-backend.herokuapp.com/' });
 
   switch (method) {
     case 'post': {

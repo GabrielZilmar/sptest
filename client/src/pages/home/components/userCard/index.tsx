@@ -67,8 +67,8 @@ class UserCard extends React.Component<IUserCardProps> {
                   style={{ overflowWrap: 'break-word' }}
                   href={url || '/'}
                 >
-                  <Tooltip title={url}>
-                    {`${url.substring(29)}`}
+                  <Tooltip title={url || ''}>
+                    {`${url?.substring(29)}`}
                   </Tooltip>
                 </a>
               </span>
