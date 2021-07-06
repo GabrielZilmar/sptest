@@ -1,9 +1,9 @@
 import fetchAPI from '../../utils/functions/request';
 
 const HttpClient = {
-  listUsers: async () => fetchAPI({
+  listUsers: async (since: number, perPage: number) => fetchAPI({
     method: 'get',
-    url: '/users',
+    url: `/users?since=${since}&perPage=${perPage}`,
   }),
   getUser: async (login: string) => fetchAPI({
     method: 'get',

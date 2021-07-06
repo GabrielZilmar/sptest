@@ -21,12 +21,14 @@ interface IUserReposProps {
 interface IUserDetailState {
   repos: IUserRepos[] | undefined;
   loading: boolean;
+  isMobile: boolean;
 }
 
 class UserDetail extends React.Component<IUserReposProps> {
   state: IUserDetailState = {
     repos: undefined,
     loading: this.props.loading || false,
+    isMobile: window.matchMedia('(max-width: 767px)').matches,
   }
 
   componentDidMount() {
@@ -56,7 +58,7 @@ class UserDetail extends React.Component<IUserReposProps> {
   };
 
   render() {
-    const { loading, repos } = this.state;
+    const { loading, repos, isMobile } = this.state;
 
     return (
       <Row
@@ -94,7 +96,7 @@ class UserDetail extends React.Component<IUserReposProps> {
                 textAlign: 'center',
               }}
               pagination={{
-                pageSize: 4,
+                pageSize: isMobile ? 1 : 4,
               }}
               renderItem={(item: IUserRepos) => (
                 <List.Item>
